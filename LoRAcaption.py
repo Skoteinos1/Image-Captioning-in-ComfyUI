@@ -103,7 +103,7 @@ class LoRACaptionLoad:
     CATEGORY = "LJRE/LORA"
 
     def captionload(self, path, pattern='*.png'):
-        text=io_file_list(path,pattern)
+        text=io_file_list(path,pattern)+io_file_list(path,'*.jpg')+io_file_list(path,'*.jpeg')
         text=list(map(os.path.basename,text))
         text='\n'.join(text)
 		
@@ -115,7 +115,7 @@ class LoRACaptionLoad:
             raise FileNotFoundError(f"No files in path '{path}'.")
 
         # Filter files by extension
-        valid_extensions = ['.png']
+        valid_extensions = ['.png', '.jpg', '.jpeg']
         dir_files = [f for f in dir_files if any(f.lower().endswith(ext) for ext in valid_extensions)]
 
         dir_files = [os.path.join(path, x) for x in dir_files]
